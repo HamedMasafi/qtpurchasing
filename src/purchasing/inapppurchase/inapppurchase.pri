@@ -30,6 +30,10 @@ android {
     include ($$PWD/android/android.pri)
 }
 
-mac {
-    include ($$PWD/mac/mac.pri)
+darwin:!watchos {
+     include ($$PWD/mac/mac.pri)
+ }
+
+winrt {
+    include ($$PWD/winrt/winrt.pri)
 }
