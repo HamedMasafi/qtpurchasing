@@ -1,4 +1,4 @@
-include($QT_INSTALL_DOCS/global/qt-module-defaults.qdocconf)
+include(/opt/Qt/Qt5.7.0/5.7/android_armv7/doc/global/qt-module-defaults.qdocconf)
 
 project                                            = QtPurchasing
 description                                        = Qt Purchasing Reference Documentation

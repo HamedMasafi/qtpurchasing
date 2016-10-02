@@ -1,7 +1,14 @@
 INCLUDEPATH += $$PWD
 
 ANDROID_PERMISSIONS += \
-    com.android.vending.BILLING
+#    Google play
+    com.android.vending.BILLING \
+#    Cafe baazar
+    com.farsitel.bazaar.permission.PAY_THROUGH_BAZAAR \
+#    Iran apps
+    ir.tgbs.iranapps.permission \
+#    Myket
+	ir.mservices.market.BILLING
 
 HEADERS += \
     $$PWD/qinappstore.h \
@@ -23,10 +30,6 @@ android {
     include ($$PWD/android/android.pri)
 }
 
-darwin:!watchos {
+mac {
     include ($$PWD/mac/mac.pri)
-}
-
-winrt {
-    include ($$PWD/winrt/winrt.pri)
 }

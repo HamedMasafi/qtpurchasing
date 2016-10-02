@@ -58,6 +58,18 @@ Module {
         exportMetaObjectRevisions: [0]
         Property { name: "products"; type: "QInAppProductQmlType"; isList: true; isReadonly: true }
         Method { name: "restorePurchases" }
+        Enum {
+            name: "BackendType"
+            values: {
+				"Auto": 0,
+                "Google": 1,
+                "CafeBazaar": 2,
+                "MyKet": 3,
+				"IranApps": 4, 
+				"Cando": 5
+            }
+        }
+        Property { name: "backendType"; type: "BackendType" }
     }
     Component {
         name: "QInAppTransaction"

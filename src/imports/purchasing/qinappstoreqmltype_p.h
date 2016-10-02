@@ -52,9 +52,21 @@ class QInAppStore;
 class QInAppStoreQmlType : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(BackendType)
     Q_PROPERTY(QQmlListProperty<QInAppProductQmlType> products READ products DESIGNABLE false)
+    Q_PROPERTY(BackendType backendType READ backendType WRITE setBackendType NOTIFY backendTypeChanged)
+
     Q_CLASSINFO("DefaultProperty", "products")
 public:
+    enum BackendType{
+        Auto,
+        Google,
+        CafeBazaar,
+        MyKet,
+        IranApps,
+        Cando
+    };
+
     explicit QInAppStoreQmlType(QObject *parent = 0);
 
     QInAppStore *store() const;
@@ -62,9 +74,18 @@ public:
 
     Q_INVOKABLE void restorePurchases();
 
+    BackendType backendType() const;
+
+public slots:
+    void setBackendType(BackendType backendType);
+
+signals:
+    void backendTypeChanged(BackendType backendType);
+
 private:
     QInAppStore *m_store;
     QList<QInAppProductQmlType *> m_products;
+    BackendType m_backendType;
 };
 
 QT_END_NAMESPACE

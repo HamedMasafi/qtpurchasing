@@ -67,6 +67,7 @@ Item {
     // ![0]
     Store {
         id: iapStore
+        backendType: Store.Google
     }
     // ![0]
 }

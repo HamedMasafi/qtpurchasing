@@ -51,6 +51,8 @@ class QInAppStore;
 class QInAppPurchaseBackend : public QObject
 {
     Q_OBJECT
+    int _backendType;
+
 public:
     struct Product
     {
@@ -76,6 +78,9 @@ public:
 
     void setStore(QInAppStore *store) { m_store = store; }
     QInAppStore *store() const { return m_store; }
+
+    int backendType() const { return _backendType; }
+    void setBackendType(const int &backendType) { _backendType = backendType; }
 
 Q_SIGNALS:
     void ready();

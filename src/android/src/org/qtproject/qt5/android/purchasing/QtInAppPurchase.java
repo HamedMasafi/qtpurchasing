@@ -119,11 +119,37 @@ public class QtInAppPurchase
         m_nativePointer = nativePointer;
     }
 
-    public void initializeConnection()
+    public void initializeConnection(int providerId)
     {
+		Intent serviceIntent = null;
 
-        Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
-        serviceIntent.setPackage("com.android.vending");
+		switch(providerId){
+		case 0: // Google play store
+			serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
+			serviceIntent.setPackage("com.android.vending");
+			break;
+			
+		case 1: //Cafe Bazaar
+			serviceIntent = new Intent("ir.cafebazaar.pardakht.InAppBillingService.BIND");
+			serviceIntent.setPackage("com.farsitel.bazaar");
+			break;
+			
+		case 2: //IranApps
+			serviceIntent = new Intent("ir.tgbs.iranapps.billing.InAppBillingService.BIND");
+			serviceIntent.setPackage("ir.tgbs.android.iranapp");
+			break;
+			
+		case 3: //MyKet
+			serviceIntent = new Intent("ir.mservices.market.InAppBillingService.BIND");
+			serviceIntent.setPackage("ir.mservices.market");
+			break;
+			
+		case 4: //Cando
+		    serviceIntent = new Intent("com.ada.market.service.payment.BIND");
+			serviceIntent.setPackage("com.ada.market");
+			break;
+		}
+		
         try {
             if (!m_context.getPackageManager().queryIntentServices(serviceIntent, 0).isEmpty()) {
                 m_context.bindService(serviceIntent, m_serviceConnection, Context.BIND_AUTO_CREATE);
@@ -203,8 +229,8 @@ public class QtInAppPurchase
                             String productId = jo.getString("productId");
                             int purchaseState = jo.getInt("purchaseState");
                             String purchaseToken = jo.getString("purchaseToken");
-                            String orderId = jo.has("orderId") ? jo.getString("orderId") : "";
-                            long timestamp = jo.has("purchaseTime") ? jo.getLong("purchaseTime") : 0;
+                            String orderId = jo.getString("orderId");
+                            long timestamp = jo.getLong("purchaseTime");
 
                             if (purchaseState == 0)
                                 registerPurchased(m_nativePointer, productId, signature, data, purchaseToken, orderId, timestamp);
@@ -356,10 +382,8 @@ public class QtInAppPurchase
             }
 
             purchaseToken = jo.getString("purchaseToken");
-            if (jo.has("orderId"))
-                orderId = jo.getString("orderId");
-            if (jo.has("purchaseTime"))
-                timestamp = jo.getLong("purchaseTime");
+            orderId = jo.getString("orderId");
+            timestamp = jo.getLong("purchaseTime");
 
         } catch (Exception e) {
             e.printStackTrace();

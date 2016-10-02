@@ -41,6 +41,7 @@ class QInAppTransaction;
 class Q_PURCHASING_EXPORT QInAppStore: public QObject
 {
     Q_OBJECT
+
 public:
     explicit QInAppStore(QObject *parent = Q_NULLPTR);
     ~QInAppStore();
@@ -49,6 +50,11 @@ public:
     Q_INVOKABLE void registerProduct(QInAppProduct::ProductType productType, const QString &identifier);
     Q_INVOKABLE QInAppProduct *registeredProduct(const QString &identifier) const;
     Q_INVOKABLE void setPlatformProperty(const QString &propertyName, const QString &value);
+
+    int backendType() const;
+
+public slots:
+    void setBackendType(int backendType);
 
 Q_SIGNALS:
     void productRegistered(QInAppProduct *product);
