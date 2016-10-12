@@ -191,7 +191,7 @@ void QInAppStoreQmlType::setBackendType(QInAppStoreQmlType::BackendType backendT
     if ((int)m_backendType == m_store->backendType())
         return;
 
-    m_store->setBackendType(backendType);
+    m_store->setBackendType((QInAppStore::BackendType)(int)backendType);
     emit backendTypeChanged(backendType);
 }
 

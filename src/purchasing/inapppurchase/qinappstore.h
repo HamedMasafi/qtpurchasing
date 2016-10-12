@@ -41,8 +41,17 @@ class QInAppTransaction;
 class Q_PURCHASING_EXPORT QInAppStore: public QObject
 {
     Q_OBJECT
+    Q_ENUMS(BackendType)
+    Q_PROPERTY(BackendType backendType READ backendType WRITE setBackendType NOTIFY backendTypeChanged)
 
 public:
+    enum BackendType{
+        Google,
+        CafeBazaar,
+        MyKet,
+        IranApps,
+        Cando
+    };
     explicit QInAppStore(QObject *parent = Q_NULLPTR);
     ~QInAppStore();
 
@@ -51,15 +60,16 @@ public:
     Q_INVOKABLE QInAppProduct *registeredProduct(const QString &identifier) const;
     Q_INVOKABLE void setPlatformProperty(const QString &propertyName, const QString &value);
 
-    int backendType() const;
+    BackendType backendType() const;
 
 public slots:
-    void setBackendType(int backendType);
+    void setBackendType(BackendType backendType);
 
 Q_SIGNALS:
     void productRegistered(QInAppProduct *product);
     void productUnknown(QInAppProduct::ProductType productType, const QString &identifier);
     void transactionReady(QInAppTransaction *transaction);
+    void backendTypeChanged(BackendType backendType);
 
 private Q_SLOTS:
     void registerPendingProducts();

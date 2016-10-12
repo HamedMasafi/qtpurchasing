@@ -37,7 +37,7 @@ QT_BEGIN_NAMESPACE
 QInAppPurchaseBackend::QInAppPurchaseBackend(QObject *parent)
     : QObject(parent)
     , m_store(0)
-    , _backendType(0)
+    , _backendType(QInAppStore::Google)
 {
 }
 

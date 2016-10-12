@@ -59,7 +59,6 @@ class QInAppStoreQmlType : public QObject
     Q_CLASSINFO("DefaultProperty", "products")
 public:
     enum BackendType{
-        Auto,
         Google,
         CafeBazaar,
         MyKet,

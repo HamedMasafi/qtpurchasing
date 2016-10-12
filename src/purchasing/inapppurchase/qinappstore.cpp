@@ -244,17 +244,18 @@ void QInAppStore::setPlatformProperty(const QString &propertyName, const QString
     d->backend->setPlatformProperty(propertyName, value);
 }
 
-int QInAppStore::backendType() const
+QInAppStore::BackendType QInAppStore::backendType() const
 {
     return d->backend->backendType();
 }
 
-void QInAppStore::setBackendType(int backendType)
+void QInAppStore::setBackendType(BackendType backendType)
 {
     if (d->backend->backendType() == backendType)
         return;
 
     d->backend->setBackendType(backendType);
+    emit backendTypeChanged(backendType);
 }
 
 /*!
