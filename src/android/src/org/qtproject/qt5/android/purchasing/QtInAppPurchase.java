@@ -121,35 +121,35 @@ public class QtInAppPurchase
 
     public void initializeConnection(int providerId)
     {
-		Intent serviceIntent = null;
+        Intent serviceIntent = null;
 
-		switch(providerId){
-		case 0: // Google play store
-			serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
-			serviceIntent.setPackage("com.android.vending");
-			break;
-			
-		case 1: //Cafe Bazaar
-			serviceIntent = new Intent("ir.cafebazaar.pardakht.InAppBillingService.BIND");
-			serviceIntent.setPackage("com.farsitel.bazaar");
-			break;
-			
-		case 2: //IranApps
-			serviceIntent = new Intent("ir.tgbs.iranapps.billing.InAppBillingService.BIND");
-			serviceIntent.setPackage("ir.tgbs.android.iranapp");
-			break;
-			
-		case 3: //MyKet
-			serviceIntent = new Intent("ir.mservices.market.InAppBillingService.BIND");
-			serviceIntent.setPackage("ir.mservices.market");
-			break;
-			
-		case 4: //Cando
-		    serviceIntent = new Intent("com.ada.market.service.payment.BIND");
-			serviceIntent.setPackage("com.ada.market");
-			break;
-		}
-		
+        switch(providerId){
+        case 0: // Google play store
+            serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
+            serviceIntent.setPackage("com.android.vending");
+            break;
+            
+        case 1: //Cafe Bazaar
+            serviceIntent = new Intent("ir.cafebazaar.pardakht.InAppBillingService.BIND");
+            serviceIntent.setPackage("com.farsitel.bazaar");
+            break;
+            
+        case 2: //IranApps
+            serviceIntent = new Intent("ir.tgbs.iranapps.billing.InAppBillingService.BIND");
+            serviceIntent.setPackage("ir.tgbs.android.iranapp");
+            break;
+            
+        case 3: //MyKet
+            serviceIntent = new Intent("ir.mservices.market.InAppBillingService.BIND");
+            serviceIntent.setPackage("ir.mservices.market");
+            break;
+            
+        case 4: //Cando
+            serviceIntent = new Intent("com.ada.market.service.payment.BIND");
+            serviceIntent.setPackage("com.ada.market");
+            break;
+        }
+        
         try {
             if (!m_context.getPackageManager().queryIntentServices(serviceIntent, 0).isEmpty()) {
                 m_context.bindService(serviceIntent, m_serviceConnection, Context.BIND_AUTO_CREATE);
