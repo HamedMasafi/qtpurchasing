@@ -41,6 +41,7 @@
 //
 
 #include "qinappproduct.h"
+#include "qinappstore.h"
 #include <QtCore/qobject.h>
 
 QT_BEGIN_NAMESPACE
@@ -51,6 +52,8 @@ class QInAppStore;
 class QInAppPurchaseBackend : public QObject
 {
     Q_OBJECT
+    QInAppStore::BackendType _backendType;
+
 public:
     struct Product
     {
@@ -76,6 +79,9 @@ public:
 
     void setStore(QInAppStore *store) { m_store = store; }
     QInAppStore *store() const { return m_store; }
+
+    QInAppStore::BackendType backendType() const { return _backendType; }
+    void setBackendType(const QInAppStore::BackendType &backendType) { _backendType = backendType; }
 
 Q_SIGNALS:
     void ready();

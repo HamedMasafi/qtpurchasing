@@ -71,4 +71,14 @@ void QInAppPurchaseBackend::setPlatformProperty(const QString &propertyName, con
     Q_UNUSED(value);
 }
 
+QInAppStore::BackendType QInAppPurchaseBackend::backendType() const
+{
+    return _backendType;
+}
+
+void QInAppPurchaseBackend::setBackendType(const QInAppStore::BackendType &backendType)
+{
+    _backendType = backendType;
+}
+
 QT_END_NAMESPACE

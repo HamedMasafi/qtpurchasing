@@ -2,6 +2,14 @@ INCLUDEPATH += $$PWD
 
 ANDROID_PERMISSIONS += \
     com.android.vending.BILLING
+#    Google play
+    com.android.vending.BILLING \
+#    Cafe baazar
+    com.farsitel.bazaar.permission.PAY_THROUGH_BAZAAR \
+#    Iran apps
+    ir.tgbs.iranapps.permission \
+#    Myket
+    ir.mservices.market.BILLING
 
 HEADERS += \
     $$PWD/qinappstore.h \
