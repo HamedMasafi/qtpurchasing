@@ -80,8 +80,8 @@ public:
     void setStore(QInAppStore *store) { m_store = store; }
     QInAppStore *store() const { return m_store; }
 
-    QInAppStore::BackendType backendType() const { return _backendType; }
-    void setBackendType(const QInAppStore::BackendType &backendType) { _backendType = backendType; }
+    QInAppStore::BackendType backendType() const;
+    void setBackendType(const QInAppStore::BackendType &backendType);
 
 Q_SIGNALS:
     void ready();

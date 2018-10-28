@@ -1,7 +1,6 @@
 INCLUDEPATH += $$PWD
 
 ANDROID_PERMISSIONS += \
-    com.android.vending.BILLING
 #    Google play
     com.android.vending.BILLING \
 #    Cafe baazar
