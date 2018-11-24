@@ -76,7 +76,7 @@ void QAndroidInAppPurchaseBackend::initialize()
 
     jint backendTypeInt = (int)backendType();
     m_javaObject.callMethod<void>("initializeConnection",
-                                  "(I;)V",
+                                  "(I)V",
                                   backendTypeInt);
 
     QFile file(finalizedUnlockableFileName());
