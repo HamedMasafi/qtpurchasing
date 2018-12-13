@@ -158,6 +158,7 @@ public class QtInAppPurchase
                 purchasedProductsQueried(m_nativePointer);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             Log.e(TAG, "Could not query InAppBillingService intent.");
             purchasedProductsQueried(m_nativePointer);
         }
