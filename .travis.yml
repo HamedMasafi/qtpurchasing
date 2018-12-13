@@ -9,7 +9,18 @@ env:
   - QT_VER=5.11.0
   - DOCKER_IMAGE=base
   - MAKE_RUN_TESTS=true
-  
+  - ANDROID_HOME=/opt/android-sdk-linux/
+  - ANDROID_NDK_HOST=linux-x86_64
+  - ANDROID_NDK_PLATFORM=android-16
+  - ANDROID_NDK_ROOT=/opt/android-ndk-r10d
+  - ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi
+  - ANDROID_NDK_TOOLCHAIN_VERSION=4.9
+  - ANDROID_NDK_TOOLS_PREFIX=arm-linux-androideabi
+  - ANDROID_SDK_ROOT=/opt/android-sdk-linux
+  - JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+  - PATH=$PATH:$JAVA_HOME/bin
+  - QMAKE=/opt/qt/$QT_VER/$PLATFORM/bin/qmake
+
 matrix:
   include:
   - os: linux
@@ -26,10 +37,11 @@ before_install:
     - travis_wait 40 ./ci/init.sh
     
 script:
-    - "./qtmodules-travis/ci/$TRAVIS_OS_NAME/build.sh"
-    
-before_deploy:
-    - "./qtmodules-travis/ci/$TRAVIS_OS_NAME/upload-prepare.sh"
+    - mkdir -p "$TRAVIS_BUILD_DIR-build"
+    - /opt/qt/$QT_VER/$PLATFORM/bin/qmake -o "$TRAVIS_BUILD_DIR-build" -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
+    - make
+    - make install
+    - make
     
 deploy:
   provider: releases
