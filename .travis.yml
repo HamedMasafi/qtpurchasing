@@ -1,0 +1,53 @@
+language: cpp
+services:
+    - docker
+sudo: required
+dist: trusty
+env:
+  global:
+  - QPMX_CACHE_DIR=$HOME/.qpmx-cache
+  - QT_VER=5.11.0
+  - DOCKER_IMAGE=base
+  - MAKE_RUN_TESTS=true
+  
+matrix:
+  include:
+  - os: linux
+    env:
+    - PLATFORM=android_arm64_v8a
+  - os: linux
+    env:
+    - PLATFORM=android_armv7
+  - os: linux
+    env:
+    - PLATFORM=android_x86
+    
+before_install:
+    - travis_wait 40 ./ci/init.sh
+    
+script:
+    - "./qtmodules-travis/ci/$TRAVIS_OS_NAME/build.sh"
+    
+before_deploy:
+    - "./qtmodules-travis/ci/$TRAVIS_OS_NAME/upload-prepare.sh"
+    
+deploy:
+  provider: releases
+  api_key:
+    secure: JTR77cTzCQPNMYK3GN5rixfymhIyW5kJ6vI7aH9K2P56UCggSSuzl0ezQLlkuDGAL3TbtYiuSwxkrdXF9iPygfLrUvpo/ER6Y4Nq7hXsr7j42rn7COXl4H+Z2sN/5j47nsziiAMHmtuhoKmsrmQZM8uZJAvIoj9UAPBoUVEXz+kMktksUEEz4GoqDnJQxj3Nl/rjL3KPzo+FfcK51t1cA9JZO8CX22Ygcj70PA4nyNfJUjsl3lqv/Q3yevVa5Rqc6NfjjhVe/M82jLjdXOs2WQD7LZ21rMw9tEvJrS4FNRtLzSduvrqaXHgXWwOETiWS69JzZE0DdKA5PySEC7ls3Jp51lZVaQ1uO/XByOGwywKlm+fMAUG5Mu6sMNMFHdf3z004VGMN4FmRHJxetzWeyKtJqDyyojjOeM2oUiVLbUBcakD0hLrB3OHd1HRAgna7T2tPjGkH22VRtQg8RGExsze3aEGQeGjPGE3gqR3Un9HORCeUmUNcx7lXzjalMbFKXjW7opE6XRRSYsj5cqnIavrQoa1Mov/uSx9Tc3lpgU8PS/PWIB2aEIztiTyY0Cky1if8Dmo69n2P0O4SiVYvEo41IB4jqLMjnZ2ISnBiMzQIOxAuKQUcdXAsmoTw5BXsi+UZHPZX5DME+lkXfgWbYMcIGcFc2GLHf5++dKLqJK4=
+  file: qtpurchasing
+  on:
+    repo: HamedMasafi/qtpurchasing
+    branch: '5.11'
+    
+before_cache:
+    - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+    - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+    - rm -rf $QPMX_CACHE_DIR/locks
+    - rm -rf $QPMX_CACHE_DIR/tmp
+cache:
+  directories:
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
+    - "$HOME/.android/build-cache"
+    - "$QPMX_CACHE_DIR"
