@@ -25,7 +25,7 @@ matrix:
     
 script:
     - mkdir -p "$TRAVIS_BUILD_DIR-build"
-    - /opt/qt/$QT_VER/$PLATFORM/bin/qmake -o "$TRAVIS_BUILD_DIR-build" -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
+    - qmake -o "$TRAVIS_BUILD_DIR-build" -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
     - make
     - make install
     - make
