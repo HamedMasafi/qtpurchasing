@@ -46,6 +46,16 @@ bool QInAppPurchaseBackend::isReady() const
     return true;
 }
 
+QInAppStore::BackendType QInAppPurchaseBackend::backendType() const
+{
+    return _backendType;
+}
+
+void QInAppPurchaseBackend::setBackendType(const QInAppStore::BackendType &backendType)
+{
+    _backendType = backendType;
+}
+
 void QInAppPurchaseBackend::queryProducts(const QList<Product> &products)
 {
     for (const Product &product : products)

@@ -48,6 +48,17 @@ Module {
             name: "purchaseRestored"
             Parameter { name: "transaction"; type: "QInAppTransaction"; isPointer: true }
         }
+        Enum {
+            name: "BackendType"
+            values: {
+                "Auto": 0,
+                "Google": 1,
+                "CafeBazaar": 2,
+                "MyKet": 3,
+                "IranApps": 4,
+                "Cando": 5
+            }
+        }
         Method { name: "purchase" }
         Method { name: "resetStatus" }
     }

@@ -245,6 +245,19 @@ void QInAppStore::setPlatformProperty(const QString &propertyName, const QString
     d->backend->setPlatformProperty(propertyName, value);
 }
 
+QInAppStore::BackendType QInAppStore::backendType() const
+{
+    return d->backend->backendType();
+}
+
+void QInAppStore::setBackendType(QInAppStore::BackendType backendType)
+{
+    if (d->backend->backendType() == backendType)
+        return;
+    d->backend->setBackendType(backendType);
+    emit backendTypeChanged(backendType);
+}
+
 /*!
  * Registers a product identified by \a identifier and with the given \a productType.
  * The \a identifier must match the identifier of the product in the remote store. If

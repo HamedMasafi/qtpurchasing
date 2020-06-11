@@ -150,4 +150,41 @@ void QInAppStoreQmlType::restorePurchases()
     m_store->restorePurchases();
 }
 
+/*!
+  \qmlproperty enumeration QtPurchasing::Store::backendType
+     This roperty hold backend type of store.
+   \list
+  \li Store.Auto Automaticaly selectoion
+  \li Store.Google Goolgle play store
+  \li Store.CafeBazaar cafe bazaar
+  \li Store.MyKet Myket store
+  \li Store.IranApps iran apps store
+  \li Store.Cando cando store
+  \endlist
+   \qml
+  Store {
+      backendType: Store.MyKet
+       Product {
+          identifier: "myConsumableProduct1"
+          type: Product.Consumable
+           // ...
+      }
+       // ...
+  }
+  \endqml
+*/
+QInAppStoreQmlType::BackendType QInAppStoreQmlType::backendType() const
+{
+    return m_backendType;
+}
+
+void QInAppStoreQmlType::setBackendType(QInAppStoreQmlType::BackendType backendType)
+{
+    if (m_backendType == backendType)
+        return;
+
+    m_backendType = backendType;
+    emit backendTypeChanged(m_backendType);
+}
+
 QT_END_NAMESPACE
