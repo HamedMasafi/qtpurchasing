@@ -48,17 +48,6 @@ Module {
             name: "purchaseRestored"
             Parameter { name: "transaction"; type: "QInAppTransaction"; isPointer: true }
         }
-        Enum {
-            name: "BackendType"
-            values: {
-                "Auto": 0,
-                "Google": 1,
-                "CafeBazaar": 2,
-                "MyKet": 3,
-                "IranApps": 4,
-                "Cando": 5
-            }
-        }
         Method { name: "purchase" }
         Method { name: "resetStatus" }
     }
@@ -70,6 +59,16 @@ Module {
         exportMetaObjectRevisions: [0]
         Property { name: "products"; type: "QInAppProductQmlType"; isList: true; isReadonly: true }
         Method { name: "restorePurchases" }
+        Enum {
+            name: "BackendType"
+            values: {
+                "Google": 0,
+                "CafeBazaar": 1,
+                "MyKet": 2,
+                "IranApps": 3,
+                "Cando": 4
+            }
+        }
     }
     Component {
         name: "QInAppTransaction"

@@ -175,16 +175,16 @@ void QInAppStoreQmlType::restorePurchases()
 */
 QInAppStoreQmlType::BackendType QInAppStoreQmlType::backendType() const
 {
-    return m_backendType;
+    return (QInAppStoreQmlType::BackendType)m_store->backendType();
 }
 
 void QInAppStoreQmlType::setBackendType(QInAppStoreQmlType::BackendType backendType)
 {
-    if (m_backendType == backendType)
+    if ((int)backendType == m_store->backendType())
         return;
 
-    m_backendType = backendType;
-    emit backendTypeChanged(m_backendType);
+    m_store->setBackendType((QInAppStore::BackendType)(int)backendType);
+    emit backendTypeChanged(backendType);
 }
 
 QT_END_NAMESPACE

@@ -83,7 +83,6 @@ signals:
 private:
     QInAppStore *m_store;
     QList<QInAppProductQmlType *> m_products;
-    BackendType m_backendType;
 };
 
 QT_END_NAMESPACE
